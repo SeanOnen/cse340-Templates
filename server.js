@@ -28,6 +28,14 @@ app.use(static)
 app.get("/", baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
+// 404 catch-all handler (middleware)
+app.use(async (err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).render("errors/error", {
+    title: "Server Error",
+    message: err.message
+  })
+})
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file

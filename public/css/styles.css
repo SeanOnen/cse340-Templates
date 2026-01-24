@@ -319,3 +319,43 @@ footer {
 main h1 {
   text-align: center;
 }
+
+/* ===========================
+   VEHICLE DETAIL VIEW
+   =========================== */
+.vehicle-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+}
+
+.vehicle-info {
+  font-size: 1rem;
+}
+
+.vehicle-info h2 {
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+  .vehicle-detail {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .vehicle-image,
+  .vehicle-info {
+    flex: 1;
+  }
+}
