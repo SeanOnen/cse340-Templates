@@ -359,3 +359,12 @@ main h1 {
     flex: 1;
   }
 }
+
+footer a,
+footer a:visited {
+  color: #ffffff;
+}
+
+footer a:hover {
+  color: #f5c518;
+}

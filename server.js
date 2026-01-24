@@ -40,11 +40,15 @@ app.use((req, res, next) => {
 /* ***********************
  * Error Handler Middleware
  *************************/
-app.use((err, req, res, next) => {
+const utilities = require("./utilities/")
+
+app.use(async (err, req, res, next) => {
   console.error(err.stack)
-  res.status(err.status || 500).render("errors/error", {
-    title: err.status === 404 ? "Page Not Found" : "Server Error",
+  const nav = await utilities.getNav()
+  res.status(500).render("errors/error", {
+    title: "Server Error",
     message: err.message,
+    nav
   })
 })
 /* ***********************
