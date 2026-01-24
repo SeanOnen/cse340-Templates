@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS public.account (
 );
 -- Data for table 'classification'
 INSERT INTO public.classification (classification_name)
-VALUES ('custom'),
+VALUES ('Custom'),
     ('Sport'),
     ('SUV'),
     ('Truck'),
@@ -247,4 +247,3 @@ WHERE inv_make = 'GM'
 UPDATE public.inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
-    
