@@ -28,12 +28,23 @@ app.use(static)
 app.get("/", baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
-// 404 catch-all handler (middleware)
-app.use(async (err, req, res, next) => {
+/* ***********************
+ * 404 Handler
+ *************************/
+app.use((req, res, next) => {
+  const err = new Error("Page Not Found")
+  err.status = 404
+  next(err)
+})
+
+/* ***********************
+ * Error Handler Middleware
+ *************************/
+app.use((err, req, res, next) => {
   console.error(err.stack)
-  res.status(500).render("errors/error", {
-    title: "Server Error",
-    message: err.message
+  res.status(err.status || 500).render("errors/error", {
+    title: err.status === 404 ? "Page Not Found" : "Server Error",
+    message: err.message,
   })
 })
 /* ***********************
