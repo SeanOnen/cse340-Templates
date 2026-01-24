@@ -25,13 +25,17 @@ invCont.buildInventoryDetail = async function (req, res, next) {
     const vehicleData = await invModel.getInventoryById(inv_id)
 
     if (!vehicleData) {
-      throw new Error("Vehicle not found")
+      const err = new Error("Vehicle not found")
+      err.status = 404
+      throw err
     }
 
     const detailHTML = utilities.buildVehicleDetail(vehicleData)
+    const nav = await utilities.getNav()
 
     res.render("inventory/detail", {
       title: `${vehicleData.inv_make} ${vehicleData.inv_model}`,
+      nav,
       content: detailHTML,
     })
   } catch (error) {
