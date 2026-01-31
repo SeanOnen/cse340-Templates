@@ -51,4 +51,68 @@ invCont.triggerError = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ *  Build inventory management view
+ * ************************** */
+invCont.buildManagementView = async function (req, res, next) {
+  try {
+    const nav = await utilities.getNav()
+
+    res.render("inventory/management", {
+      title: "Inventory Management",
+      nav,
+      message: res.locals.notice,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+invCont.buildAddClassification = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  res.render("inventory/add-classification", {
+    title: "Add Classification",
+    nav,
+    errors: null
+  })
+}
+
+invCont.addClassification = async function (req, res, next) {
+  const { classification_name } = req.body
+  const result = await invModel.addClassification(classification_name)
+
+  if (result.rowCount === 1) {
+    req.flash("notice", "Classification added successfully.")
+    res.redirect("/inv")
+  } else {
+    req.flash("notice", "Classification failed.")
+    res.redirect("/inv/add-classification")
+  }
+}
+
+invCont.buildAddInventory = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
+
+  res.render("inventory/add-inventory", {
+    title: "Add Inventory",
+    nav,
+    classificationList,
+    errors: null,
+    data: {}
+  })
+}
+
+invCont.addInventory = async function (req, res, next) {
+  const result = await invModel.addInventory(req.body)
+
+  if (result.rowCount === 1) {
+    req.flash("notice", "Inventory item added successfully.")
+    res.redirect("/inv")
+  } else {
+    req.flash("notice", "Failed to add inventory item.")
+    res.redirect("/inv/add-inventory")
+  }
+}
+
 module.exports = invCont

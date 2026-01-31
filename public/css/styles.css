@@ -368,3 +368,121 @@ footer a:visited {
 footer a:hover {
   color: #f5c518;
 }
+
+.management-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.management-links li {
+  margin: 1rem 0;
+}
+
+.management-links a {
+  font-weight: bold;
+}
+
+/* ===============================
+   Inventory Forms (Add Inventory / Add Classification)
+   =============================== */
+
+.inventory-form {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  color: #222;
+  border: 2px solid var(--brand-blue);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.08);
+}
+
+/* Headings */
+.inventory-form h1,
+.inventory-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Form layout */
+.inventory-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+/* Full-width fields */
+.inventory-form textarea,
+.inventory-form select,
+.inventory-form button {
+  grid-column: 1 / -1;
+}
+
+/* Labels */
+.inventory-form label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Inputs */
+.inventory-form input,
+.inventory-form textarea,
+.inventory-form select {
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #222;
+  font-size: 1rem;
+}
+
+/* Textarea */
+.inventory-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Submit button */
+.inventory-form button {
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--brand-blue-dark);
+  color: #fff;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.inventory-form button:hover {
+  background-color: var(--brand-blue);
+}
+
+/* Error & notice messages */
+.notice,
+.error {
+  grid-column: 1 / -1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.notice {
+  background-color: #0d47a1;
+  color: #e3f2fd;
+}
+
+.error {
+  background-color: #b71c1c;
+  color: #ffcdd2;
+}
+
+/* ===============================
+   Responsive behavior
+   =============================== */
+@media (max-width: 700px) {
+  .inventory-form form {
+    grid-template-columns: 1fr;
+  }
+}
