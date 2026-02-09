@@ -1,0 +1,19 @@
+<div class="account-view">
+  <h1><%= title %></h1>
+
+  <p>Please log in to access your account.</p>
+
+  <% if (notice && notice.length > 0) { %>
+    <div class="notice"><%= notice[0] %></div>
+  <% } %>
+
+  <form action="/account/login" method="post">
+    <label for="account_email">Email Address</label>
+    <input type="email" id="account_email" name="account_email" required>
+
+    <label for="account_password">Password</label>
+    <input type="password" id="account_password" name="account_password" required>
+
+    <input type="submit" value="Login">
+  </form>
+</div>

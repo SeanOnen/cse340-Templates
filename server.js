@@ -15,6 +15,9 @@ const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
 const session = require("express-session")
 const flash = require("connect-flash")
+const cookieParser = require("cookie-parser")
+const auth = require("./utilities/auth")
+const accountRoute = require("./routes/accountRoute")
 
 /* ***********************
  * View Engine and Templates
@@ -43,10 +46,11 @@ app.use((req, res, next) => {
 
 /* ***********************
  * BODY PARSING MIDDLEWARE
- * (THIS FIXES req.body === undefined)
  *************************/
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cookieParser())
+app.use(auth.checkJWTToken)
 
 /* ***********************
  * Routes
@@ -55,6 +59,9 @@ app.use(static)
 
 // Index route
 app.get("/", baseController.buildHome)
+
+// Account routes
+app.use("/account", accountRoute)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
