@@ -247,3 +247,13 @@ WHERE inv_make = 'GM'
 UPDATE public.inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+-- Enhancement
+CREATE TABLE favorites (
+    favorite_id SERIAL PRIMARY KEY,
+    account_id INT NOT NULL,
+    inv_id INT NOT NULL,
+    favorite_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES account(account_id) ON DELETE CASCADE,
+    CONSTRAINT fk_inventory FOREIGN KEY (inv_id) REFERENCES inventory(inv_id) ON DELETE CASCADE,
+    CONSTRAINT unique_favorite UNIQUE (account_id, inv_id)
+);

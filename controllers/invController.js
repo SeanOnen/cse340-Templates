@@ -37,6 +37,7 @@ invCont.buildInventoryDetail = async function (req, res, next) {
       title: `${vehicleData.inv_make} ${vehicleData.inv_model}`,
       nav,
       content: detailHTML,
+      inv_id
     })
   } catch (error) {
     next(error)

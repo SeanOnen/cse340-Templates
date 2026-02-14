@@ -18,6 +18,7 @@ const flash = require("connect-flash")
 const cookieParser = require("cookie-parser")
 const auth = require("./utilities/auth")
 const accountRoute = require("./routes/accountRoute")
+const favoritesRoute = require("./routes/favoritesRoute")
 
 /* ***********************
  * View Engine and Templates
@@ -44,6 +45,18 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use((req, res, next) => {
+  if (!res.locals.loggedin) {
+    res.locals.loggedin = false
+  }
+
+  if (!res.locals.accountData) {
+    res.locals.accountData = null
+  }
+
+  next()
+})
+
 /* ***********************
  * BODY PARSING MIDDLEWARE
  *************************/
@@ -65,6 +78,9 @@ app.use("/account", accountRoute)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+// Favorites routes
+app.use("/favorites", favoritesRoute)
 
 /* ***********************
  * 404 Handler

@@ -5,3 +5,11 @@
 
 <!-- Vehicle Detail -->
 <%- content %>
+
+<!-- Favorites -->
+<% if (loggedin && inv_id) { %>
+  <form action="/favorites/add" method="post">
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    <button type="submit">Add to Favorites</button>
+  </form>
+<% } %>

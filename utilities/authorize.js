@@ -22,4 +22,16 @@ authorize.checkEmployeeOrAdmin = (req, res, next) => {
   return res.redirect("/account/login")
 }
 
+/* ****************************************
+ * Restrict access to logged-in users
+ **************************************** */
+authorize.checkLogin = (req, res, next) => {
+  if (!res.locals.loggedin) {
+    req.flash("notice", "Please log in to access this feature.")
+    return res.redirect("/account/login")
+  }
+
+  return next()
+}
+
 module.exports = authorize
